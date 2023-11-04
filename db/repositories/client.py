@@ -16,6 +16,6 @@ class ClientRepo:
             (
                 self._supabase_client
                 .table("prospects")
-                .upsert(cl.to_dict())
+                .upsert(cl.model_dump())
                 .execute()
             )
