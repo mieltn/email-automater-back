@@ -5,3 +5,8 @@ pydantic[email]
 pydantic-settings
 supabase
 python-multipart
+sqlalchemy
+alembic
+psycopg2-binary
+asyncpg
+greenlet

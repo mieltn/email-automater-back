@@ -1,5 +1,4 @@
 from functools import lru_cache
-from pydantic import PostgresDsn, SecretStr, Field
 from pydantic_settings import BaseSettings
 
 class AppSettings(BaseSettings):
@@ -16,6 +15,12 @@ class AppSettings(BaseSettings):
     supabase_url: str
     supabase_anon_key: str
 
+    postgres_host: str
+    postgres_port: int
+    postgres_db: str
+    postgres_user: str
+    postgres_password: str
+
     # secret_key: SecretStr
 
     api_prefix: str = "/v1"
@@ -30,6 +35,14 @@ class AppSettings(BaseSettings):
             "title": self.title,
             "version": self.version,
         }
+    
+    @property
+    def sync_postgres_dsn(self) -> str:
+        return f"postgresql://{self.postgres_user}:{self.postgres_password}@{self.postgres_host}:{self.postgres_port}/{self.postgres_db}"
+
+    @property
+    def async_postgres_dsn(self) -> str:
+        return f"postgresql+asyncpg://{self.postgres_user}:{self.postgres_password}@{self.postgres_host}:{self.postgres_port}/{self.postgres_db}"
     
     class Config:
         env_file = ".env"
