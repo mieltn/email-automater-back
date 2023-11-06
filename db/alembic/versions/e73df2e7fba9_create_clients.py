@@ -1,8 +1,8 @@
-"""create client
+"""create clients
 
-Revision ID: 3449e6c6db9c
+Revision ID: e73df2e7fba9
 Revises: 
-Create Date: 2023-11-05 16:04:32.809703
+Create Date: 2023-11-06 00:32:13.034305
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = '3449e6c6db9c'
+revision = 'e73df2e7fba9'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -26,7 +26,7 @@ def upgrade():
     sa.Column('location', sa.String(), nullable=False),
     sa.Column('headline', sa.String(), nullable=True),
     sa.Column('current_company', sa.String(), nullable=True),
-    sa.Column('contacted', sa.String(), nullable=True),
+    sa.Column('contacted', sa.Boolean(), nullable=True),
     sa.PrimaryKeyConstraint('id')
     )
     # ### end Alembic commands ###

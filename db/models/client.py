@@ -1,4 +1,4 @@
-from sqlalchemy import Column, Integer, String
+from sqlalchemy import Column, Integer, String, Boolean
 from db.sessions import Base
 
 class Client(Base):
@@ -12,4 +12,4 @@ class Client(Base):
     location = Column(String, nullable=False)
     headline = Column(String, nullable=True)
     current_company = Column(String, nullable=True)
-    contacted: bool = Column(String, nullable=True)
+    contacted: bool = Column(Boolean, nullable=True)

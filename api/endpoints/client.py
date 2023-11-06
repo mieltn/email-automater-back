@@ -1,11 +1,11 @@
 
-from fastapi import APIRouter, Depends, HTTPException, UploadFile
+from fastapi import APIRouter, Depends, UploadFile
 from starlette import status
 
 from services.parse import ParseService
 from db.repositories.client import ClientRepo
-from api.dependecies.supabase import get_supabase_client
-from models.client import Client
+from schemas.client import Client
+from api.dependecies.postgres import get_repository
 
 
 router = APIRouter()
@@ -14,12 +14,12 @@ router = APIRouter()
     "/clients/create/from-csv",
     status_code=status.HTTP_200_OK,
 )
-def parse_csv(
+async def parse_csv(
     file: UploadFile,
     parse_service: ParseService = Depends(ParseService),
-    client_repo: ClientRepo = Depends(ClientRepo),
+    client_repo: ClientRepo = Depends(get_repository(ClientRepo)),
 ) -> list[Client]:
     clients = parse_service.clean_csv(file.file)
-    client_repo.create_many(clients)
+    await client_repo.create_many(clients)
     return clients
 

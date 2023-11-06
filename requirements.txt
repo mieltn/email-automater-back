@@ -3,7 +3,6 @@ pandas
 uvicorn[standard]
 pydantic[email]
 pydantic-settings
-supabase
 python-multipart
 sqlalchemy
 alembic

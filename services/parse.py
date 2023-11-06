@@ -1,7 +1,7 @@
 from tempfile import SpooledTemporaryFile
 import pandas as pd
 import numpy as np
-from models.client import Client
+from schemas.client import Client
 
 class ParseService:
     
