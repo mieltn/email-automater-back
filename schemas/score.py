@@ -1,10 +1,13 @@
 from pydantic import BaseModel
 
-class PageAnalytics(BaseModel):
+class Score(BaseModel):
 
-    client_id: int
+    profile_url: str
     website: str | None = None
+    performance: int | None = None
     accessibility: int | None = None
     best_practices: int | None = None
     seo: int | None = None
-    performance: int | None = None
+
+    class Config:
+        from_attributes = True

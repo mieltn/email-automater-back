@@ -8,6 +8,7 @@ from alembic import context
 from core.settings import get_app_settings
 from db.sessions import Base
 from db.models.client import Client
+from db.models.score import Score
 
 # this is the Alembic Config object, which provides
 # access to the values within the .ini file in use.

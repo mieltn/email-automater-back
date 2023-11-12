@@ -14,10 +14,3 @@ class ClientRepo:
         models = [self.model_class(**cl.model_dump()) for cl in clients]
         self._session.add_all(models)
         await self._session.commit()
-
-        #     (
-        #         self._supabase_client
-        #         .table("prospects")
-        #         .upsert(cl.model_dump())
-        #         .execute()
-        #     )

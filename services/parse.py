@@ -32,5 +32,5 @@ class ParseService:
         return df
     
     def extract_website(self, df: pd.DataFrame) -> pd.DataFrame:
-        df['website'] = df['email'].str.replace(".*@", "", regex=True)
+        df['website'] = "https://" + df['email'].str.replace(".*@", "", regex=True)
         return df

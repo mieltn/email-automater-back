@@ -3,7 +3,7 @@ from db.sessions import Base
 
 class Client(Base):
 
-    __tablename__ = "clients"
+    __tablename__ = "linkedin_prospects"
 
     id = Column(Integer, primary_key=True)
     profile_url = Column(String, nullable=False)

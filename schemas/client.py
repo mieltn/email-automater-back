@@ -10,4 +10,5 @@ class Client(BaseModel):
 
     headline: str | None = None
     current_company: str | None = None
+    website: str | None = None
     contacted: bool = False
