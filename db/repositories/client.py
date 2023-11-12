@@ -11,6 +11,6 @@ class ClientRepo:
         self._session = session
 
     async def create_many(self, clients: list[ClientSchema]) -> None:
-        models = [self.model_class(**cl.model_dump()) for cl in clients]
+        models  = [self.model_class(**cl.model_dump()) for cl in clients]
         self._session.add_all(models)
         await self._session.commit()

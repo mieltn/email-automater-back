@@ -54,13 +54,14 @@ class ScoreService:
                 params=params,
             )
             resp_json = resp.json()
+            lighthouseResult = resp_json.get("lighthouseResult")
             score = {
                 "profile_url": profile_url,
                 "website": website,
-                "performance": resp_json.get("lighthouseResult").get("categories").get("performance").get("score"),
-                "accessibility": resp_json.get("lighthouseResult").get("categories").get("accessibility").get("score"),
-                "best_practices": resp_json.get("lighthouseResult").get("categories").get("best-practices").get("score"),
-                "seo": resp_json.get("lighthouseResult").get("categories").get("seo").get("score"),
+                "performance": lighthouseResult.get("categories").get("performance").get("score") if lighthouseResult else None,
+                "accessibility": lighthouseResult.get("categories").get("accessibility").get("score") if lighthouseResult else None,
+                "best_practices": lighthouseResult.get("categories").get("best-practices").get("score") if lighthouseResult else None,
+                "seo": lighthouseResult.get("categories").get("seo").get("score") if lighthouseResult else None,
             }
         
         return await self.score_repo.create(score)

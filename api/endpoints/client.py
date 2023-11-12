@@ -1,5 +1,5 @@
 
-from fastapi import APIRouter, Depends, UploadFile
+from fastapi import APIRouter, Depends, UploadFile, BackgroundTasks
 from starlette import status
 
 from services.parse import ParseService
@@ -17,15 +17,14 @@ router = APIRouter()
 )
 async def parse_csv(
     file: UploadFile,
+    background_tasks: BackgroundTasks,
     parse_service: ParseService = Depends(ParseService),
     score_service: ScoreService = Depends(ScoreService),
     client_repo: ClientRepo = Depends(get_repository(ClientRepo)),
 ) -> list[Client]:
     clients = parse_service.clean_csv(file.file)
     await client_repo.create_many(clients)
-    # for cl in clients:
-    #     insight = await score_service.gather_insight(profile_url=cl.profile_url, website=cl.website)
-    #     if insight:
-    #         break
+    for cl in clients:
+        background_tasks.add_task(score_service.gather_insight, profile_url=cl.profile_url, website=cl.website)
     return clients
 

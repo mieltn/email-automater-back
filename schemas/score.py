@@ -3,7 +3,7 @@ from pydantic import BaseModel
 class Score(BaseModel):
 
     profile_url: str
-    website: str | None = None
+    website: str
     performance: int | None = None
     accessibility: int | None = None
     best_practices: int | None = None
