@@ -6,7 +6,7 @@ class Client(Base):
     __tablename__ = "linkedin_prospects"
 
     id = Column(Integer, primary_key=True)
-    profile_url = Column(String)
+    profile_url = Column(String, unique=True)
     email = Column(String)
     website = Column(String)
     full_name = Column(String)
